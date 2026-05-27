@@ -21,7 +21,7 @@ while ejecutando:
     elif opcion == 2:
         sitios_libres = capacidad_maxima - sitios_ocupados
         if sitios_libres == 0:
-            print("Lo sentimons, no quedan espacios en el camping")
+            print("Lo sentimos, no quedan espacios en el camping")
         else:
             try:
                 ingreso = int(input("¿Cuántos sitios o vehículos van a ingresar?"))
@@ -32,8 +32,31 @@ while ejecutando:
                 else:
                     sitios_ocupados += ingreso
                     print(f"Ingreso registrado, se han ocupado {ingreso} de sitios")
-        except ValueError:
-            print("Error deebe ingersar un número válido")
+            except ValueError:
+                print("Error: debe ingersar un número válido")
+    elif opcion == 3:
+        print(f"\n-- Registrar salida (Vehículos o sitios ocupados:  {sitios_ocupados})")
+        if sitios_ocupados == 0:
+            print("No hay vehículos registrados en el camping actualmente")
+        else:
+            try:
+                salida = int(input("¿Cuántos vehículos se retiran?: "))
+                if salida <= 0:
+                    print(f"Error: La cantidad a retirar debe ser mayor a 0")
+                elif salida > sitios_ocupados:
+                    print(f"Error: no se pueden retirar más de {sitios_ocupados} vehículos")
+                else: 
+                    sitios_ocupados -=salida
+                    print(f"Salida registrada, se han liberado {salida} sitios")
+            except ValueError:
+                print("Error: Debe ingresar un número entero válido")
+    elif opcion == 4:
+        porcentaje_ocupacion = (sitios_ocupados / capacidad_maxima) * 100
+        print(f"\n[ESTADO] Ocupación actual: {porcentaje_ocupacion}/{capacidad_maxima} sitios")
+        print(f"[ESTADO]  El camping esta al {porcentaje_ocupacion:.1f}% de su capacidad")
+    elif opcion == 5:
+        print("Cerrando el sistema")
+        ejecutando = False
     else:
         print("Opción fuera de rango")
 
